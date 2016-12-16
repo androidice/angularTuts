@@ -1,3 +1,5 @@
+///<reference path="./typings/login.ts"/>
+import { Accounts } from 'meteor/accounts-base'
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -5,8 +7,18 @@ import uiRouter from 'angular-ui-router';
 import template from './templates/login.html';
 
 class LoginCtrl {
+  userFields: IUserFields;
+  $scope: any;
+  $log: any;
   constructor($scope, $reactive, $log){
     'ngInject';
+    $reactive(this).attach($scope);
+    this.$scope = $scope;
+    this.$log = $log;
+  }
+
+  login(){
+    this.$log.log('login', this.userFields);
   }
 }
 

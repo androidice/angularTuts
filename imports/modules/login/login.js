@@ -5,6 +5,12 @@ import template from './templates/login.html';
 class LoginCtrl {
     constructor($scope, $reactive, $log) {
         'ngInject';
+        $reactive(this).attach($scope);
+        this.$scope = $scope;
+        this.$log = $log;
+    }
+    login() {
+        this.$log.log('login', this.userFields);
     }
 }
 function config($stateProvider) {

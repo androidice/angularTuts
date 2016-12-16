@@ -3,6 +3,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import accessTemplate from './templates/access.html';
 import { Login } from '../modules/login/login';
+import { Register } from '../modules/register/register';
 class UiMainCtrl {
     constructor($scope, $reactive) {
         'ngInject';
@@ -22,7 +23,8 @@ function config($urlRouterProvider, $stateProvider, $locationProvider) {
 const module = angular.module('uiMain', [
     angularMeteor,
     uiRouter,
-    Login
+    Login,
+    Register
 ]).component('uiMain', {
     controllerAs: 'vm',
     controller: UiMainCtrl

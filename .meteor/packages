@@ -17,3 +17,5 @@ es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 urigo:static-templates
 pbastowski:angular-babel
+accounts-password
+twbs:bootstrap
