@@ -1,15 +1,28 @@
+import { Meteor } from 'meteor/meteor';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 import accessTemplate from './templates/access.html';
+import appTemplate from './templates/app.html';
 import { Login } from '../modules/login/login';
 import { Register } from '../modules/register/register'
+import { Dashboard } from '../modules/dashboard/dashboard';
 
 class UiMainCtrl {
   constructor($scope, $reactive){
     'ngInject';
   }
+}
+
+function checkUser($q){
+  return $q((resolve, reject)=>{
+    if(Meteor.userId()){
+      resolve();
+    }else {
+      reject('AUTH_REQUIRED')
+    }
+  });
 }
 
 function config($urlRouterProvider, $stateProvider, $locationProvider){
@@ -21,17 +34,39 @@ function config($urlRouterProvider, $stateProvider, $locationProvider){
       abstract:true,
       url: '/access',
       template: accessTemplate
-    });
+    })
+    .state('app',{
+      abstract: true,
+      url: '/app',
+      template: appTemplate,
+      resolve: {
+        checkUser: checkUser
+      }
+    })
+    ;
   $urlRouterProvider.otherwise('/access/login');
+}
+
+
+function run($rootScope, $state, $log){
+  'ngInject';
+  $rootScope.$on('$stateChangeError',(event, toState, toParams, fromState, fromParams, error)=>{
+    if(error === 'AUTH_REQUIRED'){
+      $log.log(error);
+      $state.go('access.login');
+    }
+  });
 }
 
 const module = angular.module('uiMain',[
   angularMeteor,
   uiRouter,
   Login,
-  Register
+  Register,
+  Dashboard
 ]).component('uiMain',{
   controllerAs: 'vm',
   controller: UiMainCtrl
-}).config(config);
+}).config(config)
+  .run(run);
 export const uiMain = module.name;

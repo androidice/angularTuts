@@ -1,5 +1,5 @@
 ///<reference path="./typings/login.ts"/>
-import { Accounts } from 'meteor/accounts-base'
+import { Meteor } from 'meteor/meteor'
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -10,15 +10,24 @@ class LoginCtrl {
   userFields: IUserFields;
   $scope: any;
   $log: any;
-  constructor($scope, $reactive, $log){
+  $state: any;
+  constructor($scope, $reactive, $log, $state){
     'ngInject';
     $reactive(this).attach($scope);
     this.$scope = $scope;
     this.$log = $log;
+    this.$state = $state;
   }
 
   login(){
-    this.$log.log('login', this.userFields);
+    Meteor.loginWithPassword(this.userFields.username, this.userFields.password, (err)=>{
+      if(!err){
+        this.$log.log('successfully login', Meteor.userId());
+        this.$state.go('app.dashboard');
+      }else{
+        this.$log.log(err.reason);
+      }
+    });
   }
 }
 
