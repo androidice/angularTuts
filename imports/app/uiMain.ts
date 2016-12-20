@@ -8,6 +8,7 @@ import appTemplate from './templates/app.html';
 import { Login } from '../modules/login/login';
 import { Register } from '../modules/register/register'
 import { Dashboard } from '../modules/dashboard/dashboard';
+import { Validators } from '../modules/common/validators'
 
 class UiMainCtrl {
   constructor($scope, $reactive){
@@ -63,7 +64,8 @@ const module = angular.module('uiMain',[
   uiRouter,
   Login,
   Register,
-  Dashboard
+  Dashboard,
+  Validators
 ]).component('uiMain',{
   controllerAs: 'vm',
   controller: UiMainCtrl

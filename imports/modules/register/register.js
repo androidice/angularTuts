@@ -12,16 +12,18 @@ class RegisterCtrl {
         this.$state = $state;
     }
     register() {
-        Meteor.call('user.register', this.userFields, (err, res) => {
-            if (!err) {
-                this.$log.log(res);
-                fbq('track', 'CompleteRegistration');
-                this.$state.go('access.login');
-            }
-            else {
-                this.$log.log(err);
-            }
-        });
+        if (this.$scope.registrationForm.$valid) {
+            Meteor.call('user.register', this.userFields, (err, res) => {
+                if (!err) {
+                    this.$log.log(res);
+                    fbq('track', 'CompleteRegistration');
+                    this.$state.go('access.login');
+                }
+                else {
+                    this.$log.log(err);
+                }
+            });
+        }
     }
 }
 function config($stateProvider) {
