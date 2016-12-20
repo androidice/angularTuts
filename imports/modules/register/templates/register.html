@@ -1,10 +1,13 @@
 <div>
-  <h3>Registration</h3>
-  <form ng-submit="vm.register()">
-    <input type="text" ng-model="vm.userFields.username" name="username" placeholder="Username" required style="display:block"/>
-    <input type="email" ng-model="vm.userFields.email" name="email" placeholder="Email" required style="display:block"/>
-    <input type="password" ng-model="vm.userFields.password" name="password" placeholder="Password" required style="display:block"/>
-    <input type="submit">
+  <form ng-submit="vm.register()"  class="form-registration">
+    <h2 class="form-registration-heading">Please register</h2>
+    <label for="username" class="sr-only">Username:</label>
+    <input type="text" ng-model="vm.userFields.username" id="username" name="username" placeholder="Username" required autofocus class="form-control"/>
+    <label for="email" class="sr-only">Email:</label>
+    <input type="email" ng-model="vm.userFields.email" id="email" name="email" placeholder="Email" required class="form-control"/>
+    <label for="password" class="sr-only">Password:</label>
+    <input type="password" ng-model="vm.userFields.password" id="password" name="password" placeholder="Password" required class="form-control"/>
+    <div class="checkbox"></div>
+    <input type="submit" value="Register" class="btn btn-lg btn-primary btn-block">
   </form>
-
 </div>

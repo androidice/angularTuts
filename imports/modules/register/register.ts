@@ -22,7 +22,8 @@ class RegisterCtrl {
   register(){
     Meteor.call('user.register', this.userFields,(err, res)=>{
       if(!err){
-        this.$log.log(res)
+        this.$log.log(res);
+        fbq('track', 'CompleteRegistration');
         this.$state.go('access.login');
       }else {
         this.$log.log(err);
