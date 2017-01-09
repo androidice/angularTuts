@@ -8,7 +8,9 @@ import appTemplate from './templates/app.html';
 import { Login } from '../modules/login/login';
 import { Register } from '../modules/register/register'
 import { Dashboard } from '../modules/dashboard/dashboard';
-import { Validators } from '../modules/common/validators'
+import { VendorManagement } from '../modules/vendors/management';
+import { Validators } from '../modules/common/validators';
+
 
 class UiMainCtrl {
   constructor($scope, $reactive){
@@ -31,6 +33,11 @@ function config($urlRouterProvider, $stateProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 
   $stateProvider
+    .state('admin',{
+      abstract: true,
+      url: '/admin',
+      template: appTemplate
+    })
     .state('access', {
       abstract:true,
       url: '/access',
@@ -65,6 +72,7 @@ const module = angular.module('uiMain',[
   Login,
   Register,
   Dashboard,
+  VendorManagement,
   Validators
 ]).component('uiMain',{
   controllerAs: 'vm',
