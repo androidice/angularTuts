@@ -1,3 +1,14 @@
-<div>
-  <h1>Vendor Management</h1>
-</div>
+<section class="vendor-management">
+  <button class="btn-add-vendor btn btn-tertiary btn-thin" ng-click="vm.addVendor()"> Add Vendor
+    <i class="fa fa-plus"></i></button>
+  <aside class="vendor-list">
+    <vendor-list></vendor-list>
+  </aside>
+  <div class="vendor-details container-fluid" ng-if="vm.vendor">
+    <vendor-entry-section vendor="vm.vendor"></vendor-entry-section>
+    <button class="btn-add-vendor btn btn-tertiary btn-thin" ng-click="vm.saveVendor()"> Save
+      <i class="fa fa-plus"></i></button>
+    <button class="btn-add-vendor btn btn-tertiary btn-thin"> Cancel
+      <i class="fa fa-plus"></i></button>
+  </div>
+</section>
